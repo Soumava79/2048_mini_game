@@ -8,6 +8,10 @@ grid.randomEmptyCell().tile = new Tile(gameBoard)
 grid.randomEmptyCell().tile = new Tile(gameBoard)
 setupInput()
 
+const left = document.getElementById('left');
+const right = document.getElementById('right');
+const up = document.getElementById('up');
+const down = document.getElementById('down');
 
 function setupInput(){
     window.addEventListener("keydown",handleInput, { once: true})
@@ -16,6 +20,7 @@ function setupInput(){
 async function handleInput(e) {
     switch (e.key) {
         case "ArrowUp":
+            up.focus();
             if (!canMoveUp()) {
                 setupInput()
                 return
@@ -23,6 +28,7 @@ async function handleInput(e) {
             await moveUp()
             break
         case "ArrowDown":
+            down.focus();
             if (!canMoveDown()) {
                 setupInput()
                 return
@@ -30,6 +36,7 @@ async function handleInput(e) {
             await moveDown()
             break
         case "ArrowLeft":
+            left.focus();
             if (!canMoveLeft()) {
                 setupInput()
                 return
@@ -37,6 +44,7 @@ async function handleInput(e) {
             await moveLeft()
             break
         case "ArrowRight":
+            right.focus();
             if (!canMoveRight()) {
                 setupInput()
                 return
@@ -134,3 +142,25 @@ function canMove(cells) {
         })
     })
 }
+
+// Button controls
+
+left.addEventListener('click', (e) => {
+    e.key = 'ArrowLeft';
+    handleInput(e)
+})
+
+right.addEventListener('click', (e) => {
+    e.key = 'ArrowRight';
+    handleInput(e);
+})
+
+up.addEventListener('click', (e) => {
+    e.key = 'ArrowUp';
+    handleInput(e)
+})
+
+down.addEventListener('click', (e) => {
+    e.key = 'ArrowDown';
+    handleInput(e);
+})
